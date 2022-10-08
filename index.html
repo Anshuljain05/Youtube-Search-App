@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Youtube Video Advanced Search App in Javascript</title>
+    <title>Youtube Video Search App</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -20,9 +20,37 @@
               <input class="form-control" type="text" id="search" placeholder="Topic" required />
             </div>
             <div class="form-group">
-                <button id="btn" class="btn btn-danger btn-block">
-                    Search Videos
-                </button>
+              <label for="duration">Select Duration:</label>
+              <select class="form-control" id="duration">
+                <option>any</option>
+                <option>short</option>
+                <option>medium</option>
+                <option>long</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="order">Order:</label>
+              <select class="form-control" id="order">
+                <option>relevance</option>
+                <option>viewCount</option>
+                <option>videoCount</option>
+                <option>title</option>
+                <option>rating</option>
+                <option>date</option>
+              </select>
+            </div>
+            <div class="form-group">
+                <label for="fromdate">Before:</label>
+                <input type="text" class="form-control" name="" id="beforedate" />
+            </div>
+            <div class="form-group">
+              <label for="fromdate">After:</label>
+              <input type="text" class="form-control" name="" id="afterdate" />
+            </div>
+            <div class="form-group">
+              <button id="btn" class="btn btn-danger btn-block">
+                  Search Videos
+              </button>
             </div>
         </form>
         <table style="display: none;" id="table" class="table table-striped">
@@ -46,5 +74,13 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script src="jquery.twbsPagination.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+  <script>
+    $("#beforedate").datepicker({
+
+    })
+    $("#afterdate").datepicker({
+
+  })
+  </script>
   <script src="script.js"></script>
 </html>

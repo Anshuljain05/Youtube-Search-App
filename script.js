@@ -7,7 +7,35 @@ $(document).ready(function () {
       totalPages = 0;
     var API_KEY = "";
     var search = "";
-    var maxResults=10;    
+    var duration = "any";
+    var order = "relevance";
+    var beforedate = new Date().toISOString();
+    var afterdate = new Date().toISOString();
+    var maxResults=10;
+
+    $("#beforedate").val(beforedate)
+    $("#afterdate").val(afterdate)
+  
+    $("#beforedate").change(function(){
+        beforedate = new Date(this.val()).toISOString()
+        $("#beforedate").val(beforedate)
+        afterdate = new Date(this.val()).toISOString()
+        $("#afterdate").val(afterdate)
+    })
+  
+    $("#afterdate").change(function(){
+      afterdate = new Date(this.val()).toISOString()
+      $("#afterdate").val(afterdate)
+      beforedate = new Date(this.val()).toISOString()
+      $("#beforedate").val(beforedate)
+  })
+  
+    $("#duration").change(function () {
+      duration = $(this).children("option:selected").val();
+    });
+    $("#order").change(function () {
+      order = $(this).children("option:selected").val();
+    });
     
     $("#myForm").submit(function (e) {
       e.preventDefault();
@@ -16,7 +44,7 @@ $(document).ready(function () {
   
       API_KEY = "AIzaSyC4ld1h_rO50pMhyDs6lrSWhjBiWTXAjGI";
   
-      var url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&part=snippet&q=${search}&maxResults=${maxResults}&type=video`;
+      var url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&part=snippet&q=${search}&maxResults=${maxResults}&publishedAfter=${afterdate}&publishedBefore=${beforedate}&order=${order}&videoDuration=${duration}&type=video`;
   
       $.ajax({
         method: "GET",
@@ -53,7 +81,7 @@ $(document).ready(function () {
     });
 
     function generateRecords(recPerPage, nextPageToken) {
-      var url2 = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&part=snippet&q=${search}&maxResults=${maxResults}&pageToken=${nextPageToken}&type=video`;
+      var url2 = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&part=snippet&q=${search}&maxResults=${maxResults}&pageToken=${nextPageToken}&publishedBefore=${beforedate}&publishedAfter=${afterdate}&order=${order}&videoDuration=${duration}&type=video`;
   
       $.ajax({
         method: "GET",
